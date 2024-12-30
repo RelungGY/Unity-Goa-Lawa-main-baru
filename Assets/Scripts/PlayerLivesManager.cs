@@ -30,7 +30,6 @@ public class PlayerLivesManager : MonoBehaviour
         PlayerPrefs.SetInt("Lives", lives);
         isDead = true;
         
-        Time.timeScale = 0;
         gameText.GameOver();
     }
 

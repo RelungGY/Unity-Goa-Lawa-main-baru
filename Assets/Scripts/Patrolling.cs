@@ -7,10 +7,10 @@ public class Patrolling : MonoBehaviour
 
     public Transform[] waypoints; // Array untuk menyimpan titik-titik tujuan
     public int currentWaypoint = 0; // Indeks titik tujuan saat ini
-    private float idleTimer = 0f; // Penghitung waktu untuk perilaku idle
-    private float idleDuration = 3f; // Durasi idle dalam detik
+    public float idleTimer; // Penghitung waktu untuk perilaku idle
+    public float idleDuration; // Durasi idle dalam detik
     public bool isIdle = true; // Status apakah sedang idle atau tidak
-    private float speed = 2f; // Kecepatan pergerakan
+    public float speed; // Kecepatan pergerakan
     // Start is called before the first frame update
 
     Animator animator;
@@ -51,11 +51,11 @@ public class Patrolling : MonoBehaviour
             Vector2 direction = targetPosition - (Vector2)transform.position;
 
             // Ubah arah menghadap NPC berdasarkan arah pergerakan
-            if (direction.x > 0)
+            if (direction.x < 0)
             {
                 GetComponent<SpriteRenderer>().flipX = false;// Menghadap ke kanan
             }
-            else if (direction.x < 0)
+            else if (direction.x > 0)
             {
                 GetComponent<SpriteRenderer>().flipX = true;// Menghadap ke kiri
             }
