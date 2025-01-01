@@ -56,7 +56,7 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Unity-Goa-Lawa-main.sln",
+    "dotnet.defaultSolution": "Unity-Goa-Lawa-main-baru.sln",
     "haselerdev.aiquickfix.apiKey": "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",
     "editor.tabSize": 5
 }

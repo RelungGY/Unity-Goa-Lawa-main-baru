@@ -31,7 +31,11 @@ public class Patrolling : MonoBehaviour
         // Jika NPC sedang idle
         if (isIdle)
         {
-            animator.SetBool("idle", true);
+            if (animator != null)
+            {
+                animator.SetBool("idle", true);
+            }
+
             idleTimer += Time.deltaTime; // Tambahkan waktu ke penghitung idle
 
             // Jika durasi idle telah tercapai
@@ -43,14 +47,18 @@ public class Patrolling : MonoBehaviour
         }
         else if (!isIdle) // Jika NPC tidak idle
         {
-            animator.SetBool("idle", false);
+            if (animator != null)
+            {
+                animator.SetBool("idle", false);
+            }
+
             // Dapatkan posisi titik tujuan saat ini
             Vector2 targetPosition = waypoints[currentWaypoint].position;
 
-            // Hitung arah pergerakan NPC
+            // Hitung arah pergerakan ke titik tujuan
             Vector2 direction = targetPosition - (Vector2)transform.position;
 
-            // Ubah arah menghadap NPC berdasarkan arah pergerakan
+            // Ubah arah menghadap kiri atau kanan berdasarkan arah pergerakan
             if (direction.x < 0)
             {
                 GetComponent<SpriteRenderer>().flipX = false;// Menghadap ke kanan
@@ -59,14 +67,14 @@ public class Patrolling : MonoBehaviour
             {
                 GetComponent<SpriteRenderer>().flipX = true;// Menghadap ke kiri
             }
-            // Gerakkan NPC menuju titik tujuan
-            transform.position = new Vector2(Mathf.MoveTowards(transform.position.x, targetPosition.x, speed * Time.deltaTime), transform.position.y);
+            // Gerakkan  menuju titik tujuan
+            transform.position = new Vector2(Mathf.MoveTowards(transform.position.x, targetPosition.x, speed * Time.deltaTime), Mathf.MoveTowards(transform.position.y, targetPosition.y, speed * Time.deltaTime));
 
 
-            // Jika NPC telah mencapai titik tujuan
+            // Jika telah mencapai titik tujuan
             if (Vector2.Distance(transform.position, targetPosition) < 0.25f)
             {
-                isIdle = true; // Atur status NPC menjadi idle
+                isIdle = true; // Atur status menjadi idle
                 currentWaypoint++; // Pindah ke titik tujuan berikutnya
 
                 // Jika telah mencapai titik tujuan terakhir, kembali ke titik awal
